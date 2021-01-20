@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All News</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<h2>Hyper news</h2>
+
+<form action="" method="GET">
+    <input type="text" name="q">
+    <input type="submit" value="Submit">
+</form>
+
+{% regroup news_list by created|slice:11 as grouped_news %}
+
+{% for created in grouped_news %}
+<h4>{{ created.grouper}}</h4>
+
+<ul>
+    {% for news in created.list %}
+    <li><a href="/news/{{ news.link }}/">{{news.title}}</a></li>
+    {% empty %}
+    <li>No news available!</li>
+    {% endfor %}
+</ul>
+{% empty %}
+<br>
+No news available!
+{% endfor %}
+
+<p>
+    <a target="_blank" href="/news/create/">Add news</a>
+</p>
+</body>
+</html>
