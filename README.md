@@ -1,1 +1,1 @@
-"# HyperNews" 
+# HyperNews
